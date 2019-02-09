@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  sqlserver:
+    image: microsoft/mssql-server-linux:2017-CU6
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: sql-s3rv3r%
+      MSSQL_PID: Developer
+    ports:
+      - "1433:1433"
+  
+  theservice:
+    image: carsten:paaglatis
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      HelloThereSomething: "yay from env"
